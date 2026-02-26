@@ -1,31 +1,46 @@
-import { Routes, Route } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
+
 import Home from "./pages/Home";
 import Models from "./pages/Models";
-import Analytics from "./pages/Analytics";
-import Settings from "./pages/Settings";
-import ModelDetails from "./pages/ModelDetails";
+import Datasets from "./pages/Datasets";
+import Spaces from "./pages/Spaces";
+import Docs from "./pages/Docs";
+import DocDetails from "./pages/DocDetails";
+import Blogs from "./pages/Blogs";
+import BlogDetails from "./pages/BlogDetails";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+import "./index.css";
+import "./App.css";
 
 function App() {
   return (
-    <div className="app-layout">
-      <Sidebar />
+    <Router>
+      <Navbar />
 
-      <div className="main-section">
-        <Navbar />
+      <Routes>
+        {/* MAIN */}
+        <Route path="/" element={<Home />} />
+        <Route path="/models" element={<Models />} />
+        <Route path="/datasets" element={<Datasets />} />
+        <Route path="/spaces" element={<Spaces />} />
 
-        <div className="page-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/models" element={<Models />} />
-            <Route path="/model/:id" element={<ModelDetails />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
+        {/* DOCS */}
+        <Route path="/docs" element={<Docs />} />
+        <Route path="/docs/:slug" element={<DocDetails />} />
+
+        {/* BLOGS */}
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:slug" element={<BlogDetails />} />
+
+        {/* AUTH */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
   );
 }
 
