@@ -1,33 +1,40 @@
 import { NavLink } from "react-router-dom";
 
-const Sidebar = () => {
+
+function Sidebar() {
+  const activeStyle = ({ isActive }) =>
+    isActive ? "sidebar-link active" : "sidebar-link";
+
   return (
-    <div className="sidebar">
-      <h2 className="sidebar-title">Dashboard</h2>
+    <aside className="sidebar">
+      <h3 className="sidebar-title">TASKS</h3>
 
-      <nav className="sidebar-links">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/models">Models</NavLink>
-        <NavLink to="/datasets">Datasets</NavLink>
-        <NavLink to="/spaces">Spaces</NavLink>
-        <NavLink to="/playground">AI Playground</NavLink>
-        <NavLink to="/analytics">Analytics</NavLink>
-      </nav>
+      <NavLink to="/text-generation" className={activeStyle}>
+        <span className="icon">📝</span>
+        <span>Text Generation</span>
+      </NavLink>
 
-      <div className="sidebar-divider"></div>
+      <NavLink to="/image-generation" className={activeStyle}>
+        <span className="icon">🎨</span>
+        <span>Image Generation</span>
+      </NavLink>
 
-      <div className="sidebar-extra">
-        <p className="sidebar-section-title">Resources</p>
-        <NavLink to="/docs">Documentation</NavLink>
-        <NavLink to="/pricing">Pricing</NavLink>
-        <NavLink to="/enterprise">Enterprise</NavLink>
-      </div>
+      <NavLink to="/audio-processing" className={activeStyle}>
+        <span className="icon">🎧</span>
+        <span>Audio Processing</span>
+      </NavLink>
 
-      <div className="sidebar-footer">
-        <p>v1.0</p>
-      </div>
-    </div>
+      <NavLink to="/video-ai" className={activeStyle}>
+        <span className="icon">🎬</span>
+        <span>Video AI</span>
+      </NavLink>
+
+      <NavLink to="/ai-agents" className={activeStyle}>
+        <span className="icon">🤖</span>
+        <span>AI Agents</span>
+      </NavLink>
+    </aside>
   );
-};
+}
 
 export default Sidebar;

@@ -17,7 +17,12 @@ function DocDetails() {
           `http://localhost:5000/api/docs/${slug}`
         );
 
-        setContent(res.data.content);
+        if (res.data.success) {
+          setContent(res.data.content);
+        } else {
+          setContent("Failed to load documentation.");
+        }
+
       } catch (error) {
         console.error("Error loading docs:", error);
         setContent("Failed to load documentation.");

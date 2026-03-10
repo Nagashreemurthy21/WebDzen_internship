@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 function BlogDetails() {
-  const { slug } = useParams();
+  const { id } = useParams();
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -11,10 +12,17 @@ function BlogDetails() {
     const fetchBlog = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/blogs/${slug}`
+          `http://localhost:5000/api/blog/${id}`
         );
-        setContent(res.data.content);
+
+        if (res.data.success) {
+          setContent(res.data.content);
+        } else {
+          setContent("Failed to load blog.");
+        }
+
       } catch (error) {
+        console.error(error);
         setContent("Failed to load blog.");
       } finally {
         setLoading(false);
@@ -22,17 +30,15 @@ function BlogDetails() {
     };
 
     fetchBlog();
-  }, [slug]);
+  }, [id]);
 
   return (
-    <div className="docs-wrapper">
-      <div className="docs-container">
-        {loading ? (
-          <p>Loading article...</p>
-        ) : (
-          <div className="blog-content">{content}</div>
-        )}
-      </div>
+    <div style={{ padding: "60px", maxWidth: "900px", margin: "auto" }}>
+      {loading ? (
+        <h2>Loading blog...</h2>
+      ) : (
+        <ReactMarkdown>{content}</ReactMarkdown>
+      )}
     </div>
   );
 }

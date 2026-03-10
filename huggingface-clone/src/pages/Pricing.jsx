@@ -1,35 +1,79 @@
 function Pricing() {
   return (
-    <div className="page-wrapper">
+    <div className="pricing-wrapper">
 
-      <h1 className="page-title">Pricing</h1>
-      <p className="page-description">
-        Choose a plan that fits your AI development needs.
-      </p>
+      <div className="pricing-header">
+        <h1>Simple & Transparent Pricing</h1>
+        <p>Choose the perfect plan to power your AI development journey.</p>
+      </div>
 
-      <div className="card-grid">
+      <div className="pricing-grid">
 
-        <div className="dataset-card">
+        {/* FREE */}
+        <div className="pricing-card">
           <h3>Free</h3>
-          <p>$0/month</p>
-          <p>Basic API access</p>
+          <h2>$0<span>/month</span></h2>
+          <ul>
+            <li>✓ Basic API Access</li>
+            <li>✓ Community Support</li>
+            <li>✓ Limited Requests</li>
+            <li>✓ Public Models Access</li>
+          </ul>
+          <button className="pricing-btn">Get Started</button>
         </div>
 
-        <div className="dataset-card">
+        {/* PRO */}
+        <div className="pricing-card popular">
+          <div className="popular-badge">Most Popular</div>
           <h3>Pro</h3>
-          <p>$29/month</p>
-          <p>Unlimited requests</p>
+          <h2>$29<span>/month</span></h2>
+          <ul>
+            <li>✓ Unlimited API Requests</li>
+            <li>✓ Priority Support</li>
+            <li>✓ Advanced Analytics</li>
+            <li>✓ Private Model Hosting</li>
+            <li>✓ Early Feature Access</li>
+          </ul>
+          <button className="pricing-btn primary-btn">Upgrade Now</button>
         </div>
 
-        <div className="dataset-card">
+        {/* ENTERPRISE */}
+        <div className="pricing-card">
           <h3>Enterprise</h3>
-          <p>Custom pricing</p>
-          <p>Dedicated hosting</p>
+          <h2>Custom</h2>
+          <ul>
+            <li>✓ Dedicated Infrastructure</li>
+            <li>✓ Custom Integrations</li>
+            <li>✓ SLA & 24/7 Support</li>
+            <li>✓ SOC2 Compliance</li>
+            <li>✓ Role-Based Access Control</li>
+          </ul>
+          <button className="pricing-btn">Contact Sales</button>
         </div>
 
+      </div>
+
+      {/* WHY SECTION */}
+      <div className="pricing-why">
+        <h2>Why Choose Our Platform?</h2>
+        <div className="why-grid">
+          <div>
+            <h4>⚡ High Performance</h4>
+            <p>Optimized infrastructure for real-time AI inference.</p>
+          </div>
+          <div>
+            <h4>🔐 Enterprise Security</h4>
+            <p>End-to-end encryption and compliance-ready systems.</p>
+          </div>
+          <div>
+            <h4>📈 Scalable</h4>
+            <p>Scale from startup to enterprise effortlessly.</p>
+          </div>
+        </div>
       </div>
 
     </div>
   );
 }
+
 export default Pricing;

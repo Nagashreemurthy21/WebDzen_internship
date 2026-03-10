@@ -1,0 +1,84 @@
+/* ================= AUDIO ================= */
+
+.audio-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;   /* reduced from 60px */
+}
+
+.audio-card {
+  width: 100%;
+  max-width: 750px;     /* reduced from 900px */
+  background: linear-gradient(145deg, #111827, #0f172a);
+  padding: 35px;        /* reduced from 50px */
+  border-radius: 18px;
+  border: 1px solid #1f2937;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Smaller title */
+
+.audio-title {
+  font-size: 26px;      /* reduced from 42px */
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: white;
+}
+
+/* Input Group */
+
+.audio-input-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;  /* reduced spacing */
+}
+
+.file-input {
+  background: #1f2937;
+  color: white;
+  padding: 10px 12px;   /* reduced */
+  border-radius: 8px;
+  border: 1px solid #334155;
+  font-size: 14px;
+}
+
+/* Smaller button */
+
+.audio-btn {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none;
+  padding: 10px 20px;   /* reduced */
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;      /* reduced */
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.audio-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+}
+
+.audio-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Result */
+
+.audio-result {
+  background: #1e293b;
+  padding: 18px;        /* reduced */
+  border-radius: 10px;
+  color: #e2e8f0;
+  line-height: 1.6;
+  font-size: 14px;      /* smaller text */
+}
+
+.audio-result h3 {
+  margin-bottom: 10px;
+  font-size: 16px;      /* reduced */
+}

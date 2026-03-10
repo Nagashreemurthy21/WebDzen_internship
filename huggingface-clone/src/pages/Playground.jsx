@@ -1,82 +1,58 @@
 import { useState } from "react";
+import axios from "axios";
 
-const Playground = () => {
+function Playground() {
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
+  const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("mistralai/mistral-7b-instruct");
 
-  const generateResponse = async () => {
-    if (!prompt) return;
-
-    setLoading(true);
-
+  const generateText = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          prompt,
-          model: selectedModel
-        })
-      });
+      setLoading(true);
+      setOutput("");
 
-      const data = await res.json();
-      setResponse(data.choices[0].message.content);
-    } catch (err) {
-      setResponse("Error generating response.");
+      const res = await axios.post(
+        "http://localhost:5000/api/generate",
+        { prompt }
+      );
+
+      setOutput(res.data.choices[0].message.content);
+    } catch (error) {
+      setOutput("Error generating response.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>AI Playground</h1>
+    <div className="models-container">
+      <h1 className="models-title">AI Playground</h1>
 
-      <select
-        value={selectedModel}
-        onChange={(e) => setSelectedModel(e.target.value)}
-        style={{ marginBottom: "20px" }}
-      >
-        <option value="mistralai/mistral-7b-instruct">
-          Mistral 7B
-        </option>
-        <option value="meta-llama/llama-3-8b-instruct">
-          Llama 3 8B
-        </option>
-        <option value="openai/gpt-4o-mini">
-          GPT-4o Mini
-        </option>
-      </select>
+      <div className="playground-box">
+        <textarea
+          className="playground-input"
+          placeholder="Enter your prompt..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
 
-      <textarea
-        rows="6"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your prompt..."
-        style={{ width: "100%", padding: "10px" }}
-      />
+        <button
+          className="generate-btn"
+          onClick={generateText}
+          disabled={loading}
+        >
+          {loading ? "Generating..." : "Generate"}
+        </button>
 
-      <button
-        onClick={generateResponse}
-        style={{ marginTop: "20px", padding: "10px 20px" }}
-      >
-        Generate
-      </button>
-
-      {loading && <p>Generating...</p>}
-
-      {response && (
-        <div style={{ marginTop: "30px" }}>
-          <h3>Response:</h3>
-          <p>{response}</p>
-        </div>
-      )}
+        {output && (
+          <div className="playground-output">
+            <h3>Response:</h3>
+            <p>{output}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
-};
+}
 
 export default Playground;

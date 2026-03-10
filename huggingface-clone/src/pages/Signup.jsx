@@ -1,63 +1,37 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
+function Signup() {
   return (
-    <div className="login-wrapper">
-      <div className="login-container">
-        <h2 className="login-title">Create Account</h2>
-        <p className="login-subtitle">
-          Join and explore powerful AI models
-        </p>
+    <div className="auth-wrapper">
+      <div className="auth-card">
+        <h1>Create Account</h1>
+        <p>Join and explore powerful AI models</p>
 
-        <form className="login-form">
-          <div className="login-input-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Nagashree K S" />
-          </div>
+        <form className="auth-form">
+          <label>Full Name</label>
+          <input type="text" placeholder="Enter your name" />
 
-          <div className="login-input-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="naagashree42@gmail.com" />
-          </div>
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email" />
 
-          <div className="login-input-group">
-            <label>Password</label>
-            <div className="password-box">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Create strong password"
-              />
-              <span
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            </div>
-          </div>
+          <label>Password</label>
+          <input type="password" placeholder="Create strong password" />
 
-          <button className="login-btn">
+          <button type="submit" className="primary-btn full-btn">
             Create Account
           </button>
+
+          <div className="auth-divider">OR</div>
+
+          <button type="button" className="google-btn">
+            Continue with Google
+          </button>
+
+          <div className="auth-footer">
+            Already have an account? <span className="auth-link">Login</span>
+          </div>
         </form>
-
-        <div className="login-divider">
-          <span>OR</span>
-        </div>
-
-        <button className="google-btn">
-          Continue with Google
-        </button>
-
-        <p className="signup-link">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Signup;

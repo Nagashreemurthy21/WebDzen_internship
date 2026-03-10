@@ -1,70 +1,46 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
+function Login() {
   return (
-    <div className="login-wrapper">
-      <div className="login-container">
-        <h2 className="login-title">Login</h2>
-        <p className="login-subtitle">
-          Access your AI workspace and models
-        </p>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1>Welcome Back</h1>
+        <p>Access your AI workspace and models</p>
 
-        <form className="login-form">
-          <div className="login-input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              defaultValue="naagashree42@gmail.com"
-            />
+        <form className="auth-form">
+          <div className="input-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" />
           </div>
 
-          <div className="login-input-group">
+          <div className="input-group">
             <label>Password</label>
-            <div className="password-box">
-              <input
-                type={showPassword ? "text" : "password"}
-                defaultValue="Nagashree@123"
-              />
-              <span
-                onClick={() => setShowPassword(!showPassword)}
-                className="toggle-password"
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            </div>
+            <input type="password" placeholder="Enter your password" />
           </div>
 
-          <div className="login-options">
-            <label>
-              <input type="checkbox" defaultChecked />
+          <div className="auth-row">
+            <label className="checkbox">
+              <input type="checkbox" />
               Remember me
             </label>
 
-            <Link to="#" className="forgot-link">
-              Forgot password?
-            </Link>
+            <span className="auth-link">Forgot password?</span>
           </div>
 
-          <button className="login-btn">Login</button>
+          <button className="auth-btn">Login</button>
+
+          <div className="divider">OR</div>
+
+          <button type="button" className="google-btn">
+            Continue with Google
+          </button>
+
+          <div className="auth-footer">
+            Don’t have an account? <span className="auth-link">Sign up</span>
+          </div>
         </form>
-
-        <div className="login-divider">
-          <span>OR</span>
-        </div>
-
-        <button className="google-btn">
-          Continue with Google
-        </button>
-
-        <p className="signup-link">
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
+

@@ -1,44 +1,111 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 
-export default function Navbar() {
+function Navbar() {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const activeStyle = ({ isActive }) =>
+    isActive ? "nav-link active" : "nav-link";
 
   return (
     <nav className="navbar">
-      <div className="nav-logo">🤗 HuggingFace Clone</div>
+
+      {/* Logo */}
+      <NavLink to="/" className="logo">
+        🤗 HuggingFace Clone
+      </NavLink>
 
       <div className="nav-right">
-        <Link to="/">Home</Link>
-        <Link to="/docs">Docs</Link>
 
-        <div
-          className="community-wrapper"
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-        >
-          <span className="community-link">Community ▾</span>
+        <NavLink to="/models" className={activeStyle}>
+          Models
+        </NavLink>
+
+        <NavLink to="/datasets" className={activeStyle}>
+          Datasets
+        </NavLink>
+
+        <NavLink to="/docs" className={activeStyle}>
+          Docs
+        </NavLink>
+
+        {/* COMMUNITY DROPDOWN */}
+        <div className="dropdown" ref={dropdownRef}>
+
+          <button
+            className="nav-link dropdown-toggle"
+            onClick={() => setOpen(!open)}
+          >
+            Community ▾
+          </button>
 
           {open && (
-            <div className="community-dropdown">
-              <Link to="/blogs" className="dropdown-item">
+            <div
+              className="dropdown-menu"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <NavLink
+                to="/blogs"
+                className="dropdown-item"
+                onClick={() => setOpen(false)}
+              >
                 Blog Articles
-              </Link>
+              </NavLink>
 
-              <Link to="/blogs" className="dropdown-item">
+              <NavLink
+                to="/social"
+                className="dropdown-item"
+                onClick={() => setOpen(false)}
+              >
                 Social Posts
-              </Link>
+              </NavLink>
 
-              <Link to="/blogs" className="dropdown-item">
+              <NavLink
+                to="/papers"
+                className="dropdown-item"
+                onClick={() => setOpen(false)}
+              >
                 Daily Papers
-              </Link>
+              </NavLink>
             </div>
           )}
         </div>
 
-        <Link to="/login" className="login-btn">Login</Link>
-        <Link to="/signup" className="signup-btn">Sign Up</Link>
+        <NavLink to="/enterprise" className={activeStyle}>
+          Enterprise
+        </NavLink>
+
+        <NavLink to="/pricing" className={activeStyle}>
+          Pricing
+        </NavLink>
+
+        <NavLink to="/login" className="login-btn">
+          Login
+        </NavLink>
+
+        <NavLink to="/signup" className="signup-btn">
+          Sign Up
+        </NavLink>
+
       </div>
     </nav>
   );
 }
+
+export default Navbar;
